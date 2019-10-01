@@ -109,9 +109,9 @@ function deuVelha() {
     }
 }
 
-// function bot(){
-//     const jogadaBot = Math.random() * 9;
-// }
+function bot(){
+    const jogadaBot = Math.random() * 9;
+}
 
 $switchBot.addEventListener('click', function () {
     $stateSwitchBot.classList.toggle('switch-on');
