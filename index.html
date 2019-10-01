@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Jogo da Velha</title>
+
+  
+  <link rel="stylesheet" href="css/reset.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <main class="pagina-principal">
+    <section class="container-left">
+
+      <div class="box-jogadores">
+        <input placeholder="Jogador 01" class="jogador-01"></input>
+        <div class="jogador-02-wrapper">
+          <input placeholder="Jogador 02" class="jogador-02"></input>
+          <div class="switch switch-bot">
+            <div class="state-switch state-switch-bot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-main-md">
+        <h2 class="tipo-de-partida">Tipo de Partida</h2>
+        <div class="box-md">
+          <div class="md-wrapper">
+            <h2>Melhor de 3</h2>
+            <div class="switch switch-md">
+              <div class="state-switch state-switch-md"></div>
+            </div>
+            <h2>Melhor de 5</h2>
+          </div>
+        </div>
+      </div>
+
+      <button class="botao-jogar">Jogar</button>
+
+      <h2 class="historico-partidas">Histórico de Partidas</h2>
+      <div class="box-main-historico">
+        <div class="box-historico">
+          <div class="box-declara-vencedor">
+            <h2 class="vencedor">Vencedor</h2>
+            <p class="nome-vencedor">Nome do Jogador</p>
+          </div>
+          <h2 class="cenario">Cenário</h2>
+          <div class="main-bloquinhos">
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+          </div>
+        </div>
+        <div class="box-historico">
+          <div class="box-declara-vencedor">
+            <h2 class="vencedor">Vencedor</h2>
+            <p class="nome-vencedor">Nome do Jogador</p>
+          </div>
+          <h2 class="cenario">Cenário</h2>
+          <div class="main-bloquinhos">
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+          </div>
+        </div>
+        <div class="box-historico">
+          <div class="box-declara-vencedor">
+            <h2 class="vencedor">Vencedor</h2>
+            <p class="nome-vencedor">Nome do Jogador</p>
+          </div>
+          <h2 class="cenario">Cenário</h2>
+          <div class="main-bloquinhos">
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+          </div>
+        </div>
+        <div class="box-historico">
+          <div class="box-declara-vencedor">
+            <h2 class="vencedor">Vencedor</h2>
+            <p class="nome-vencedor">Nome do Jogador</p>
+          </div>
+          <h2 class="cenario">Cenário</h2>
+          <div class="main-bloquinhos">
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+          </div>
+        </div>
+        <div class="box-historico">
+          <div class="box-declara-vencedor">
+            <h2 class="vencedor">Vencedor</h2>
+            <p class="nome-vencedor">Nome do Jogador</p>
+          </div>
+          <h2 class="cenario">Cenário</h2>
+          <div class="main-bloquinhos">
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+          </div>
+        </div>
+        <div class="box-historico">
+          <div class="box-declara-vencedor">
+            <h2 class="vencedor">Vencedor</h2>
+            <p class="nome-vencedor">Nome do Jogador</p>
+          </div>
+          <h2 class="cenario">Cenário</h2>
+          <div class="main-bloquinhos">
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+          </div>
+        </div>
+        <div class="box-historico">
+          <div class="box-declara-vencedor">
+            <h2 class="vencedor">Vencedor</h2>
+            <p class="nome-vencedor">Nome do Jogador</p>
+          </div>
+          <h2 class="cenario">Cenário</h2>
+          <div class="main-bloquinhos">
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">x</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+            <div class="bloquinho">o</div>
+          </div>
+        </div>
+      </div>
+
+
+      <button class="botao-reiniciar">Reiniciar</button>
+
+    </section>
+
+    <section class="container-center">
+      <div class="box-main-placar">
+        <h2 class="contador-placar placar-1">0</h2>
+        <div class="box-placar">
+          <h2 class="nome-placar">placar</h2>
+          <p class="nome-jogador-placar">Nome jogador</p>
+        </div>
+        <h2 class="contador-placar placar-2">0</h2>
+      </div>
+
+      <div class="main-blocos">
+        <div class="blocos bloco-1"></div>
+        <div class="blocos bloco-2"></div>
+        <div class="blocos bloco-3"></div>
+        <div class="blocos bloco-4"></div>
+        <div class="blocos bloco-5"></div>
+        <div class="blocos bloco-6"></div>
+        <div class="blocos bloco-7"></div>
+        <div class="blocos bloco-8"></div>
+        <div class="blocos bloco-9"></div>
+      </div>
+
+    </section>
+
+    <section class="container-right">
+
+      <h2 class="historico-jogadas">Histórico de Jogadas</h2>
+      <div class="box-historico-jogadas">
+        <div class="mostra-jogada">O</div>
+        <div class="box-jogadas-jogador">
+          <h2 class="jogadas-historico-jogador">Nome do jogador</h2>
+          <p class="declara-quadrado">primeiro quadrado</p>
+        </div>
+      </div>
+
+      <div class="box-historico-jogadas">
+        <div class="mostra-jogada">O</div>
+        <div class="box-jogadas-jogador">
+          <h2 class="jogadas-historico-jogador">Nome do jogador</h2>
+          <p class="declara-quadrado">primeiro quadrado</p>
+        </div>
+      </div>
+      
+      <div class="box-historico-jogadas">
+        <div class="mostra-jogada">O</div>
+        <div class="box-jogadas-jogador">
+          <h2 class="jogadas-historico-jogador">Nome do jogador</h2>
+          <p class="declara-quadrado">primeiro quadrado</p>
+        </div>
+      </div>
+
+      <div class="box-historico-jogadas">
+        <div class="mostra-jogada">O</div>
+        <div class="box-jogadas-jogador">
+          <h2 class="jogadas-historico-jogador">Nome do jogador</h2>
+          <p class="declara-quadrado">primeiro quadrado</p>
+        </div>
+      </div>
+
+      <div class="box-historico-jogadas">
+        <div class="mostra-jogada">O</div>
+        <div class="box-jogadas-jogador">
+          <h2 class="jogadas-historico-jogador">Nome do jogador</h2>
+          <p class="declara-quadrado">primeiro quadrado</p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="javascript/app.js"></script>
+</body>
+
+</html>

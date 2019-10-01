@@ -1,0 +1,339 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Lato', sans-serif;
+    background-color: #af49f3;
+}
+
+.pagina-principal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.container-left {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.box-jogadores{
+    width: 75%;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.jogador-01 {
+    color: #af49f3;
+    background-color: #fff;
+    border-radius: 7px;
+    border-style: none;
+    width: 100%;   
+    height: 1.8em;
+    margin-bottom: 12px;
+    padding: 0.3em;
+    box-sizing: border-box;
+    padding-left: 1em;
+    outline: none;
+}
+.jogador-01::placeholder {
+    color: #af49f3;
+}
+
+.jogador-02-wrapper{
+    background-color: #fff;
+    width: 100%;
+    border-radius: 7px;
+    border-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.jogador-02 {
+    color: #af49f3;
+    background-color: transparent;
+    border-style: none;
+    width: 70%;
+    height: 1.8em;
+    padding: 0.3em;
+    box-sizing: border-box;
+    padding-left: 1em;
+    outline: none;
+}
+
+.jogador-02::placeholder {
+    color: #af49f3;
+}
+
+.switch {
+    background-color: #af49f3;
+    border-radius: 12px;
+    width: 4em;
+    height: 95%;  
+    align-items: center;
+    display: flex;
+    padding: 0 3px;
+    border: 1px solid #fff;
+}
+
+.state-switch {
+    background-color: #fff;
+    width: 1.1em;
+    height: 1.1em;
+    border-radius: 5em;
+    transition-duration: 0.2s;
+}
+
+.switch-on {
+    transform: translateX(2.9em);
+}
+
+.switch-bot {
+    background-color: #9c9c9c;
+}
+
+.switch-bot-on {
+    background-color: #af49f3;
+}
+
+.box-main-md{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tipo-de-partida {
+    color: #fff;
+}
+
+.box-md {
+    width: 90%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.md-wrapper {
+    width: 100%;
+    height: 1.4em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.botao-jogar {
+    font-size: 1.3em;
+    color: #fff;
+    width: 75%;
+    height: 1.8em;
+    background-color: #12eb36;
+    border-style: none;
+    border-radius: 7px;
+    margin-bottom: 20px;
+}
+
+.botao-jogar:hover {
+    background-color: #fff;
+    color: #12eb36;
+}
+
+.box-main-historico {
+    width: 100%;
+    height: 45%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+    border: 1px solid #fff;
+}
+
+.box-historico {
+    width: 100%;
+    height: 3.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.box-declara-vencedor {
+    width: 40%;
+    height: 1.8em;
+    background-color: #fff;
+    display: flex;
+    align-items: left;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 0.7em;
+    border-radius: 7px;
+}
+
+.historico-partidas{
+    color: #fff;
+    margin-bottom: 0.5em;
+}
+
+.vencedor {
+    font-size: 1.3em;
+    color: #12eb36;
+}
+
+
+.cenario {
+    color: #fff;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-bloquinhos {
+    width: 3.6em;
+    height: 3.6em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.bloquinho{
+    color: #6d6e6e;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: #fff;
+    border-radius: 3px;
+    width: 1em;
+    height: 1em;
+    margin: 0.1em;
+}
+
+.botao-reiniciar {
+    font-size: 1.3em;
+    color: #af49f3;
+    width: 75%;
+    height: 1.8em;
+    background-color: #fff;
+    border-style: none;
+    border-radius: 7px;
+    margin-top: 10px;
+}
+
+.botao-reiniciar:hover {
+    background-color: #af49f3;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.container-center {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box-main-placar {
+    font-size: 1.5em;
+    color: #af49f3;
+    background-color: #fff;
+    width: 70%;
+    height: 3em;
+    border-radius: 10px;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 50px;
+}
+
+.nome-placar {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.nome-jogador-placar {
+    font-size: .7em;
+    margin-top: 15px;
+}
+
+.contador-placar {
+    font-size: 2em;
+}
+
+.main-blocos {
+    display: flex;
+    flex-wrap: wrap;
+    width: 26rem;
+    height: 26rem;
+}
+
+.blocos {
+    color: #6d6e6e;
+    font-size: 6em;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #fff;
+    display: flex;
+    width: 8rem;
+    height: 8rem;
+    margin: 5px;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.container-right {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.historico-jogadas {
+    color: #fff;
+    margin: 10px;
+}
+
+.box-historico-jogadas {
+    width: 90%;
+    height: 3.5em;
+    background-color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 5px;
+}
+
+.box-jogadas-jogador {
+    text-align: center;
+}
+
+.declara-quadrado {
+    color: #af49f3;
+}
+
+.mostra-jogada {
+    color: #6d6e6e;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 700;
+}
