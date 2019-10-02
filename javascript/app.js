@@ -22,6 +22,8 @@ const $bloco9 = document.querySelector('.bloco-9');
 let jogada = 'x';
 let vencedor;
 
+let botAtivado = false;
+
 function alternarJogada() {
     if (jogada == 'x') {
         jogada = 'o';
@@ -48,7 +50,6 @@ function verificarVitoria() {
         $bloco1.textContent, $bloco2.textContent, $bloco3.textContent,
         $bloco4.textContent, $bloco5.textContent, $bloco6.textContent,
         $bloco7.textContent, $bloco8.textContent, $bloco9.textContent]
-    // console.log(posicoes);
     const linha789 = [posicoes[0], posicoes[1], posicoes[2]];
     const linha456 = [posicoes[3], posicoes[4], posicoes[5]];
     const linha123 = [posicoes[6], posicoes[7], posicoes[8]];
@@ -76,6 +77,8 @@ function sequenciaValida(posicoes) {
 }
 
 function reset() {
+    console.log(deuVelha())
+    console.log('teste2', vencedor)
     if (deuVelha() || vencedor) {
         $bloco1.innerHTML = '';
         $bloco2.innerHTML = '';
@@ -109,13 +112,57 @@ function deuVelha() {
     }
 }
 
-function bot(){
-    const jogadaBot = Math.random() * 9;
+
+function bot() {
+    if(vencedor){ return };
+    if(deuVelha()){ return };
+
+    const jogadaBot = Math.floor(Math.random() * 9);
+    if (jogadaBot == 0 && $bloco1.textContent == '') {
+        $bloco1.textContent = jogada;
+        verificarVitoria();
+        alternarJogada();
+    } else if (jogadaBot == 1 && $bloco2.textContent == '') {
+        $bloco2.textContent = jogada;
+        verificarVitoria();
+        alternarJogada();
+    } else if (jogadaBot == 2 && $bloco3.textContent == '') {
+        $bloco3.textContent = jogada;
+        verificarVitoria();
+        alternarJogada();
+    } else if (jogadaBot == 3 && $bloco4.textContent == '') {
+        $bloco4.textContent = jogada;
+        verificarVitoria();
+        alternarJogada();
+    } else if (jogadaBot == 4 && $bloco5.textContent == '') {
+        $bloco5.textContent = jogada;
+        verificarVitoria();
+        alternarJogada();
+    } else if (jogadaBot == 5 && $bloco6.textContent == '') {
+        $bloco6.textContent = jogada;
+        verificarVitoria();
+        alternarJogada();
+    } else if (jogadaBot == 6 && $bloco7.textContent == '') {
+        $bloco7.textContent = jogada;
+        verificarVitoria();
+        alternarJogada();
+    } else if (jogadaBot == 7 && $bloco8.textContent == '') {
+        $bloco8.textContent = jogada;
+        verificarVitoria();
+        alternarJogada();
+    } else if (jogadaBot == 8 && $bloco9.textContent == '') {
+        $bloco9.textContent = jogada;
+        verificarVitoria();
+        alternarJogada();
+    } else {
+        bot();
+    }
 }
 
 $switchBot.addEventListener('click', function () {
     $stateSwitchBot.classList.toggle('switch-on');
     $switchBot.classList.toggle('switch-bot-on');
+    botAtivado = !botAtivado;
 })
 
 $switchMd.addEventListener('click', function () {
@@ -167,5 +214,8 @@ $mainBlocos.addEventListener('click', function (event) {
 
     verificarVitoria();
     alternarJogada();
+    if (botAtivado) {
+        bot();
+    }
     setTimeout(reset, 2000);
 })
