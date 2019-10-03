@@ -4,6 +4,8 @@ const $stateSwitchBot = document.querySelector('.state-switch-bot');
 const $switchMd = document.querySelector('.switch-md');
 const $stateSwitchMd = document.querySelector('.state-switch-md');
 
+const $botaoReiniciar = document.querySelector('.botao-reiniciar');
+
 const $placar1 = document.querySelector('.placar-1');
 const $placar2 = document.querySelector('.placar-2');
 
@@ -77,22 +79,30 @@ function sequenciaValida(posicoes) {
 }
 
 function reset() {
-    console.log(deuVelha())
-    console.log('teste2', vencedor)
-    if (deuVelha() || vencedor) {
-        $bloco1.innerHTML = '';
-        $bloco2.innerHTML = '';
-        $bloco3.innerHTML = '';
-        $bloco4.innerHTML = '';
-        $bloco5.innerHTML = '';
-        $bloco6.innerHTML = '';
-        $bloco7.innerHTML = '';
-        $bloco8.innerHTML = '';
-        $bloco9.innerHTML = '';
 
-        jogada = 'x';
-        vencedor = undefined;
+    $bloco1.innerHTML = '';
+    $bloco2.innerHTML = '';
+    $bloco3.innerHTML = '';
+    $bloco4.innerHTML = '';
+    $bloco5.innerHTML = '';
+    $bloco6.innerHTML = '';
+    $bloco7.innerHTML = '';
+    $bloco8.innerHTML = '';
+    $bloco9.innerHTML = '';
+
+    jogada = 'x';
+    vencedor = undefined;
+}
+
+function resetVelhaVencedor() {
+    if (deuVelha() || vencedor) {
+        reset();
     }
+}
+
+function resetPlacar(){
+    $placar1.textContent = 0;
+    $placar2.textContent = 0;
 }
 
 // Segundo o marcos (MERITO DA MILA)
@@ -114,8 +124,8 @@ function deuVelha() {
 
 
 function bot() {
-    if(vencedor){ return };
-    if(deuVelha()){ return };
+    if (vencedor) { return };
+    if (deuVelha()) { return };
 
     const jogadaBot = Math.floor(Math.random() * 9);
     if (jogadaBot == 0 && $bloco1.textContent == '') {
@@ -162,6 +172,8 @@ function bot() {
 $switchBot.addEventListener('click', function () {
     $stateSwitchBot.classList.toggle('switch-on');
     $switchBot.classList.toggle('switch-bot-on');
+    resetPlacar();
+    reset();
     botAtivado = !botAtivado;
 })
 
@@ -217,5 +229,12 @@ $mainBlocos.addEventListener('click', function (event) {
     if (botAtivado) {
         bot();
     }
-    setTimeout(reset, 2000);
+
+    setTimeout(resetVelhaVencedor, 2000);
+})
+
+
+$botaoReiniciar.addEventListener('click',function(){
+    reset();
+    resetPlacar();
 })
