@@ -26,6 +26,8 @@ let vencedor;
 
 let botAtivado = false;
 
+let md = false;
+
 function alternarJogada() {
     if (jogada == 'x') {
         jogada = 'o';
@@ -100,12 +102,11 @@ function resetVelhaVencedor() {
     }
 }
 
-function resetPlacar(){
+function resetPlacar() {
     $placar1.textContent = 0;
     $placar2.textContent = 0;
 }
 
-// Segundo o marcos (MERITO DA MILA)
 function deuVelha() {
     if (($bloco1.textContent == 'x' || $bloco1.textContent == 'o') &&
         ($bloco2.textContent == 'x' || $bloco2.textContent == 'o') &&
@@ -169,6 +170,18 @@ function bot() {
     }
 }
 
+function melhorDeTres() {
+    if (md == false && ($placar1.textContent == 3 || $placar2.textContent == 3)) {
+        resetPlacar();
+    }
+}
+
+function melhorDeCinco() {
+    if (md == true && ($placar1.textContent == 5 || $placar2.textContent == 5)) {
+        resetPlacar();
+    }
+}
+
 $switchBot.addEventListener('click', function () {
     $stateSwitchBot.classList.toggle('switch-on');
     $switchBot.classList.toggle('switch-bot-on');
@@ -179,6 +192,7 @@ $switchBot.addEventListener('click', function () {
 
 $switchMd.addEventListener('click', function () {
     $stateSwitchMd.classList.toggle('switch-on');
+    md = !md;
 })
 
 $mainBlocos.addEventListener('click', function (event) {
@@ -229,12 +243,12 @@ $mainBlocos.addEventListener('click', function (event) {
     if (botAtivado) {
         bot();
     }
-
     setTimeout(resetVelhaVencedor, 2000);
+    setTimeout(melhorDeCinco, 2000);
+    setTimeout(melhorDeTres, 2000);
 })
 
-
-$botaoReiniciar.addEventListener('click',function(){
+$botaoReiniciar.addEventListener('click', function () {
     reset();
     resetPlacar();
 })
