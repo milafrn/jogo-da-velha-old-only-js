@@ -228,7 +228,8 @@ $switchMd.addEventListener('click', function () {
 
 $mainBlocos.addEventListener('click', function (event) {
     if (vencedor) { return };
-
+    if ($jogador1.value == 0 || $jogador2.value == 0) {return};
+    
     if (event.target.classList.contains('main-blocos')) {
         return;
     }
