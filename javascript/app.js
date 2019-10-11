@@ -1,3 +1,6 @@
+const $jogador1 = document.querySelector('.jogador-01');
+const $jogador2 = document.querySelector('.jogador-02');
+
 const $switchBot = document.querySelector('.switch-bot');
 const $stateSwitchBot = document.querySelector('.state-switch-bot');
 
@@ -20,6 +23,8 @@ const $bloco6 = document.querySelector('.bloco-6');
 const $bloco7 = document.querySelector('.bloco-7');
 const $bloco8 = document.querySelector('.bloco-8');
 const $bloco9 = document.querySelector('.bloco-9');
+
+const $historicoJogadas = document.querySelector('.wrapper-historico-jogadas');
 
 let jogada = 'x';
 let vencedor;
@@ -94,6 +99,8 @@ function reset() {
 
     jogada = 'x';
     vencedor = undefined;
+
+    $historicoJogadas.innerHTML = '';
 }
 
 function resetVelhaVencedor() {
@@ -171,15 +178,37 @@ function bot() {
 }
 
 function melhorDeTres() {
-    if (md == false && ($placar1.textContent == 3 || $placar2.textContent == 3)) {
+    if (md == false && ($placar1.textContent == 2 || $placar2.textContent == 2)) {
         resetPlacar();
     }
 }
 
 function melhorDeCinco() {
-    if (md == true && ($placar1.textContent == 5 || $placar2.textContent == 5)) {
+    if (md == true && ($placar1.textContent == 3 || $placar2.textContent == 3)) {
         resetPlacar();
     }
+}
+
+function saberJogador(jogadaAtual){
+    const saberJogador1 = $jogador1.value;
+    const saberJogador2 = $jogador2.value;
+
+    if(jogadaAtual == 'x'){return saberJogador1};
+    if(jogadaAtual == 'o'){return saberJogador2};
+}
+
+function adicionaHistoricoJogadas(jogadaAtual, posicao) {
+    const guardaHistorico = $historicoJogadas.innerHTML;
+
+    $historicoJogadas.innerHTML = guardaHistorico + `
+        <div class="box-historico-jogadas">
+          <div class="mostra-jogada">${jogadaAtual}</div>
+          <div class="box-jogadas-jogador">
+            <h2 class="jogadas-historico-jogador">${saberJogador(jogadaAtual)}</h2>
+            <p class="declara-quadrado">${posicao} quadrado</p>
+          </div>
+        </div>
+    `
 }
 
 $switchBot.addEventListener('click', function () {
@@ -193,6 +222,8 @@ $switchBot.addEventListener('click', function () {
 $switchMd.addEventListener('click', function () {
     $stateSwitchMd.classList.toggle('switch-on');
     md = !md;
+    resetPlacar();
+    reset();
 })
 
 $mainBlocos.addEventListener('click', function (event) {
@@ -204,38 +235,47 @@ $mainBlocos.addEventListener('click', function (event) {
     if (event.target.classList.contains('bloco-1')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'primeiro');
     }
     if (event.target.classList.contains('bloco-2')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'segundo');
     }
     if (event.target.classList.contains('bloco-3')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'terceiro');
     }
     if (event.target.classList.contains('bloco-4')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'quarto');
     }
     if (event.target.classList.contains('bloco-5')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'quinto');
     }
     if (event.target.classList.contains('bloco-6')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'sexto');
     }
     if (event.target.classList.contains('bloco-7')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'setimo');
     }
     if (event.target.classList.contains('bloco-8')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'oitavo');
     }
     if (event.target.classList.contains('bloco-9')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'nono');
     }
 
     verificarVitoria();
@@ -252,3 +292,4 @@ $botaoReiniciar.addEventListener('click', function () {
     reset();
     resetPlacar();
 })
+
