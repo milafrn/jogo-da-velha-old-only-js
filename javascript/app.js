@@ -7,6 +7,8 @@ const $stateSwitchBot = document.querySelector('.state-switch-bot');
 const $switchMd = document.querySelector('.switch-md');
 const $stateSwitchMd = document.querySelector('.state-switch-md');
 
+const $boxMainHistorico = document.querySelector('.box-main-historico');
+
 const $botaoReiniciar = document.querySelector('.botao-reiniciar');
 
 const $placar1 = document.querySelector('.placar-1');
@@ -189,13 +191,15 @@ function melhorDeCinco() {
     }
 }
 
-function saberJogador(jogadaAtual){
+function saberJogador(jogadaAtual) {
     const saberJogador1 = $jogador1.value;
     const saberJogador2 = $jogador2.value;
 
-    if(jogadaAtual == 'x'){return saberJogador1};
-    if(jogadaAtual == 'o'){return saberJogador2};
+    if (jogadaAtual == 'x') { return saberJogador1 };
+    if (jogadaAtual == 'o') { return saberJogador2 };
 }
+
+// Funções de criação \/
 
 function adicionaHistoricoJogadas(jogadaAtual, posicao) {
     const guardaHistorico = $historicoJogadas.innerHTML;
@@ -211,12 +215,46 @@ function adicionaHistoricoJogadas(jogadaAtual, posicao) {
     `
 }
 
+// function adicionarHistoricoPartidas(){
+//     const boxHistoricoJogada = document.createElement('div');
+//     boxHistoricoJogada.classList.add('box-historico');
+
+//     $boxMainHistorico.appendChild(boxHistoricoJogada);
+// }
+// funções de criação /\
+
+function piscarJogador() {
+    if ($jogador1.value != 0 || $jogador2.value != 0) { return };
+    $jogador1.classList.add('digite-jogador');
+    $jogador2.classList.add('digite-jogador');
+    setTimeout(function () {
+        $jogador1.classList.remove('digite-jogador');
+        $jogador2.classList.remove('digite-jogador');
+    }, 500)
+    setTimeout(function () {
+        $jogador1.classList.add('digite-jogador');
+        $jogador2.classList.add('digite-jogador');
+    }, 1000)
+    setTimeout(function () {
+        $jogador1.classList.remove('digite-jogador');
+        $jogador2.classList.remove('digite-jogador');
+    }, 1500)
+}
+
+
 $switchBot.addEventListener('click', function () {
     $stateSwitchBot.classList.toggle('switch-on');
     $switchBot.classList.toggle('switch-bot-on');
     resetPlacar();
     reset();
     botAtivado = !botAtivado;
+    if (botAtivado) {
+        $jogador2.value = 'BOT';
+        $jogador2.disabled = true;
+    } else {
+        $jogador2.value = '';
+        $jogador2.disabled = false;
+    }
 })
 
 $switchMd.addEventListener('click', function () {
@@ -226,10 +264,26 @@ $switchMd.addEventListener('click', function () {
     reset();
 })
 
+
+$jogador1.addEventListener('keypress', function () {
+    if ($jogador1.value == 0) {
+        $jogador1.classList.remove('digite-jogador');
+    }
+})
+
+$jogador2.addEventListener('keypress', function () {
+    if ($jogador2.value == 0) {
+        $jogador2.classList.remove('digite-jogador');
+    }
+})
+
+
+
 $mainBlocos.addEventListener('click', function (event) {
     if (vencedor) { return };
-    if ($jogador1.value == 0 || $jogador2.value == 0) {return};
-    
+    piscarJogador()
+    if ($jogador1.value == 0 || $jogador2.value == 0) { return };
+
     if (event.target.classList.contains('main-blocos')) {
         return;
     }
