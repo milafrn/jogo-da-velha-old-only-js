@@ -162,10 +162,12 @@ body {
 .box-historico {
     width: 100%;
     height: 3.5em;
+    min-height: 3.5em;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 10px;
+    background-color: red;
 }
 
 .box-declara-vencedor {
@@ -340,4 +342,12 @@ body {
 
 .wrapper-historico-jogadas{
     width: 100%;
+}
+
+.digite-jogador{
+    color:red;
+}
+
+.digite-jogador::placeholder{
+    color: red;
 }

@@ -215,12 +215,80 @@ function adicionaHistoricoJogadas(jogadaAtual, posicao) {
     `
 }
 
-// function adicionarHistoricoPartidas(){
-//     const boxHistoricoJogada = document.createElement('div');
-//     boxHistoricoJogada.classList.add('box-historico');
+function adicionarHistoricoPartidas(){
+    const boxHistorico = document.createElement('div');
+    boxHistorico.classList.add('box-historico');
 
-//     $boxMainHistorico.appendChild(boxHistoricoJogada);
-// }
+    const boxDeclaraVencedor = document.createElement('div');
+    boxDeclaraVencedor.classList.add('box-declara-vencedor');
+
+    const vencedor = document.createElement('h2');
+    vencedor.classList.add('vencedor');
+    vencedor.textContent = 'Vencedor';
+
+    const nomeJogador = document.createElement('p');
+    nomeJogador.classList.add('nome-vencedor');
+    nomeJogador.textContent = 'Nome do jogador';
+
+    const cenario = document.createElement('h2');
+    cenario.classList.add('cenario')
+    cenario.textContent = 'Cenário';
+
+    const mainBloquinhos = document.createElement('div');
+    mainBloquinhos.classList.add('main-bloquinhos');
+
+    const bloquinho1 = document.createElement('div');
+    bloquinho1.classList.add('bloquinho');
+    bloquinho1.textContent = 'x';
+
+    const bloquinho2 = document.createElement('div');
+    bloquinho2.classList.add('bloquinho');
+    bloquinho2.textContent = 'x';
+    
+    const bloquinho3 = document.createElement('div');
+    bloquinho3.classList.add('bloquinho');
+    bloquinho3.textContent = 'x';
+    
+    const bloquinho4 = document.createElement('div');
+    bloquinho4.classList.add('bloquinho');
+    bloquinho4.textContent = 'x';
+    
+    const bloquinho5 = document.createElement('div');
+    bloquinho5.classList.add('bloquinho');
+    bloquinho5.textContent = 'x';
+    
+    const bloquinho6 = document.createElement('div');
+    bloquinho6.classList.add('bloquinho');
+    bloquinho6.textContent = 'x';
+    
+    const bloquinho7 = document.createElement('div');
+    bloquinho7.classList.add('bloquinho');
+    bloquinho7.textContent = 'x';
+    
+    const bloquinho8 = document.createElement('div');
+    bloquinho8.classList.add('bloquinho');
+    bloquinho8.textContent = 'x';
+    
+    const bloquinho9 = document.createElement('div');
+    bloquinho9.classList.add('bloquinho');
+    bloquinho9.textContent = 'x';
+
+    $boxMainHistorico.appendChild(boxHistorico);
+    boxHistorico.appendChild(boxDeclaraVencedor);
+    boxDeclaraVencedor.appendChild(vencedor);
+    boxDeclaraVencedor.appendChild(nomeJogador);
+    boxHistorico.appendChild(cenario);
+    boxHistorico.appendChild(mainBloquinhos);
+    mainBloquinhos.appendChild(bloquinho1);
+    mainBloquinhos.appendChild(bloquinho2);
+    mainBloquinhos.appendChild(bloquinho3);
+    mainBloquinhos.appendChild(bloquinho4);
+    mainBloquinhos.appendChild(bloquinho5);
+    mainBloquinhos.appendChild(bloquinho6);
+    mainBloquinhos.appendChild(bloquinho7);
+    mainBloquinhos.appendChild(bloquinho8);
+    mainBloquinhos.appendChild(bloquinho9);
+}
 // funções de criação /\
 
 function piscarJogador() {
@@ -280,6 +348,7 @@ $jogador2.addEventListener('keypress', function () {
 
 
 $mainBlocos.addEventListener('click', function (event) {
+    adicionarHistoricoPartidas();
     if (vencedor) { return };
     piscarJogador()
     if ($jogador1.value == 0 || $jogador2.value == 0) { return };
