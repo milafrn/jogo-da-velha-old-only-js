@@ -14,6 +14,8 @@ const $botaoReiniciar = document.querySelector('.botao-reiniciar');
 const $placar1 = document.querySelector('.placar-1');
 const $placar2 = document.querySelector('.placar-2');
 
+const $nomeJogadorPlacar = document.querySelector('.nome-jogador-placar');
+
 const $mainBlocos = document.querySelector('.main-blocos');
 
 const $bloco1 = document.querySelector('.bloco-1');
@@ -55,6 +57,18 @@ function atribuirPlacar() {
     }
 }
 
+function atribuirNomeVencedor() {
+    if (vencedor == 'x') {
+        return $jogador1.value
+    } else if (vencedor == 'o') {
+        return $jogador2.value
+    }
+    if(deuVelha()){
+        return 'Deu Velha!'
+    }
+}
+
+
 function verificarVitoria() {
 
     const posicoes = [
@@ -77,6 +91,7 @@ function verificarVitoria() {
             atribuirVencedor();
         };
     }
+    
     atribuirPlacar();
 }
 
@@ -114,9 +129,11 @@ function resetVelhaVencedor() {
 function resetPlacar() {
     $placar1.textContent = 0;
     $placar2.textContent = 0;
+    $nomeJogadorPlacar.textContent = '';
 }
 
 function deuVelha() {
+
     if (($bloco1.textContent == 'x' || $bloco1.textContent == 'o') &&
         ($bloco2.textContent == 'x' || $bloco2.textContent == 'o') &&
         ($bloco3.textContent == 'x' || $bloco3.textContent == 'o') &&
@@ -140,38 +157,47 @@ function bot() {
     const jogadaBot = Math.floor(Math.random() * 9);
     if (jogadaBot == 0 && $bloco1.textContent == '') {
         $bloco1.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'primeiro');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 1 && $bloco2.textContent == '') {
         $bloco2.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'segundo');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 2 && $bloco3.textContent == '') {
         $bloco3.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'terceiro');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 3 && $bloco4.textContent == '') {
         $bloco4.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'quarto');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 4 && $bloco5.textContent == '') {
         $bloco5.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'quinto');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 5 && $bloco6.textContent == '') {
         $bloco6.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'sexto');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 6 && $bloco7.textContent == '') {
         $bloco7.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'setimo');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 7 && $bloco8.textContent == '') {
         $bloco8.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'oitavo');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 8 && $bloco9.textContent == '') {
         $bloco9.textContent = jogada;
+        adicionaHistoricoJogadas(jogada, 'nono');
         verificarVitoria();
         alternarJogada();
     } else {
@@ -199,6 +225,16 @@ function saberJogador(jogadaAtual) {
     if (jogadaAtual == 'o') { return saberJogador2 };
 }
 
+function jogadorAtual(){
+    if(botAtivado){ return }
+    if(jogada == 'x'){
+        $nomeJogadorPlacar.textContent = $jogador1.value;
+    }
+    if(jogada == 'o'){
+        $nomeJogadorPlacar.textContent = $jogador2.value;
+    }
+}
+
 // Funções de criação \/
 
 function adicionaHistoricoJogadas(jogadaAtual, posicao) {
@@ -215,20 +251,23 @@ function adicionaHistoricoJogadas(jogadaAtual, posicao) {
     `
 }
 
-function adicionarHistoricoPartidas(){
+function adicionarHistoricoPartidas() {
+    if (!(deuVelha() || vencedor)) {
+        return
+    }
     const boxHistorico = document.createElement('div');
     boxHistorico.classList.add('box-historico');
 
     const boxDeclaraVencedor = document.createElement('div');
     boxDeclaraVencedor.classList.add('box-declara-vencedor');
 
-    const vencedor = document.createElement('h2');
-    vencedor.classList.add('vencedor');
-    vencedor.textContent = 'Vencedor';
+    const vencedorHistorico = document.createElement('h2');
+    vencedorHistorico.classList.add('vencedor');
+    vencedorHistorico.textContent = 'Vencedor';
 
     const nomeJogador = document.createElement('p');
     nomeJogador.classList.add('nome-vencedor');
-    nomeJogador.textContent = 'Nome do jogador';
+    nomeJogador.textContent = atribuirNomeVencedor();
 
     const cenario = document.createElement('h2');
     cenario.classList.add('cenario')
@@ -239,43 +278,43 @@ function adicionarHistoricoPartidas(){
 
     const bloquinho1 = document.createElement('div');
     bloquinho1.classList.add('bloquinho');
-    bloquinho1.textContent = 'x';
+    bloquinho1.textContent = $bloco1.textContent;
 
     const bloquinho2 = document.createElement('div');
     bloquinho2.classList.add('bloquinho');
-    bloquinho2.textContent = 'x';
-    
+    bloquinho2.textContent = $bloco2.textContent;
+
     const bloquinho3 = document.createElement('div');
     bloquinho3.classList.add('bloquinho');
-    bloquinho3.textContent = 'x';
-    
+    bloquinho3.textContent = $bloco3.textContent;
+
     const bloquinho4 = document.createElement('div');
     bloquinho4.classList.add('bloquinho');
-    bloquinho4.textContent = 'x';
-    
+    bloquinho4.textContent = $bloco4.textContent;
+
     const bloquinho5 = document.createElement('div');
     bloquinho5.classList.add('bloquinho');
-    bloquinho5.textContent = 'x';
-    
+    bloquinho5.textContent = $bloco5.textContent;
+
     const bloquinho6 = document.createElement('div');
     bloquinho6.classList.add('bloquinho');
-    bloquinho6.textContent = 'x';
-    
+    bloquinho6.textContent = $bloco6.textContent;
+
     const bloquinho7 = document.createElement('div');
     bloquinho7.classList.add('bloquinho');
-    bloquinho7.textContent = 'x';
-    
+    bloquinho7.textContent = $bloco7.textContent;
+
     const bloquinho8 = document.createElement('div');
     bloquinho8.classList.add('bloquinho');
-    bloquinho8.textContent = 'x';
-    
+    bloquinho8.textContent = $bloco8.textContent;
+
     const bloquinho9 = document.createElement('div');
     bloquinho9.classList.add('bloquinho');
-    bloquinho9.textContent = 'x';
+    bloquinho9.textContent = $bloco9.textContent;
 
     $boxMainHistorico.appendChild(boxHistorico);
     boxHistorico.appendChild(boxDeclaraVencedor);
-    boxDeclaraVencedor.appendChild(vencedor);
+    boxDeclaraVencedor.appendChild(vencedorHistorico);
     boxDeclaraVencedor.appendChild(nomeJogador);
     boxHistorico.appendChild(cenario);
     boxHistorico.appendChild(mainBloquinhos);
@@ -292,7 +331,7 @@ function adicionarHistoricoPartidas(){
 // funções de criação /\
 
 function piscarJogador() {
-    if ($jogador1.value != 0 || $jogador2.value != 0) { return };
+    if ($jogador1.value != 0 && $jogador2.value != 0) { return };
     $jogador1.classList.add('digite-jogador');
     $jogador2.classList.add('digite-jogador');
     setTimeout(function () {
@@ -348,9 +387,8 @@ $jogador2.addEventListener('keypress', function () {
 
 
 $mainBlocos.addEventListener('click', function (event) {
-    adicionarHistoricoPartidas();
     if (vencedor) { return };
-    piscarJogador()
+    piscarJogador();
     if ($jogador1.value == 0 || $jogador2.value == 0) { return };
 
     if (event.target.classList.contains('main-blocos')) {
@@ -402,11 +440,15 @@ $mainBlocos.addEventListener('click', function (event) {
         adicionaHistoricoJogadas(jogada, 'nono');
     }
 
+    
+    jogadorAtual()
     verificarVitoria();
     alternarJogada();
     if (botAtivado) {
         bot();
     }
+    adicionarHistoricoPartidas();
+    console.log();
     setTimeout(resetVelhaVencedor, 2000);
     setTimeout(melhorDeCinco, 2000);
     setTimeout(melhorDeTres, 2000);
