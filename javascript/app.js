@@ -7,6 +7,8 @@ const $stateSwitchBot = document.querySelector('.state-switch-bot');
 const $switchMd = document.querySelector('.switch-md');
 const $stateSwitchMd = document.querySelector('.state-switch-md');
 
+const $botaoJogar = document.querySelector('.botao-jogar');
+
 const $boxMainHistorico = document.querySelector('.box-main-historico');
 
 const $botaoReiniciar = document.querySelector('.botao-reiniciar');
@@ -63,7 +65,7 @@ function atribuirNomeVencedor() {
     } else if (vencedor == 'o') {
         return $jogador2.value
     }
-    if(deuVelha()){
+    if (deuVelha()) {
         return 'Deu Velha!'
     }
 }
@@ -91,7 +93,7 @@ function verificarVitoria() {
             atribuirVencedor();
         };
     }
-    
+
     atribuirPlacar();
 }
 
@@ -225,12 +227,12 @@ function saberJogador(jogadaAtual) {
     if (jogadaAtual == 'o') { return saberJogador2 };
 }
 
-function jogadorAtual(){
-    if(botAtivado){ return }
-    if(jogada == 'x'){
+function jogadorAtual() {
+    if (botAtivado) { return }
+    if (jogada == 'x') {
         $nomeJogadorPlacar.textContent = $jogador1.value;
     }
-    if(jogada == 'o'){
+    if (jogada == 'o') {
         $nomeJogadorPlacar.textContent = $jogador2.value;
     }
 }
@@ -384,12 +386,47 @@ $jogador2.addEventListener('keypress', function () {
     }
 })
 
+function piscarBotaoJogar() {
+    if ($botaoJogar.textContent != 'Jogar') { return };
+    $botaoJogar.classList.add('piscar-botao-jogar');
+    $botaoJogar.classList.add('piscar-botao-jogar');
+    setTimeout(function () {
+        $botaoJogar.classList.remove('piscar-botao-jogar');
+        $botaoJogar.classList.remove('piscar-botao-jogar');
+    }, 500)
+    setTimeout(function () {
+        $botaoJogar.classList.add('piscar-botao-jogar');
+        $botaoJogar.classList.add('piscar-botao-jogar');
+    }, 1000)
+    setTimeout(function () {
+        $botaoJogar.classList.remove('piscar-botao-jogar');
+        $botaoJogar.classList.remove('piscar-botao-jogar');
+    }, 1500)
+}
+
+function jogar() {
+    $botaoJogar.innerHTML = 'Pausar';
+    $botaoJogar.classList.add('pausar');
+}
+function pausar() {
+    $botaoJogar.innerHTML = 'Jogar';
+    $botaoJogar.classList.remove('pausar');
+}
+
+$botaoJogar.addEventListener('click', function () {
+    if ($jogador1.value == 0 || $jogador2.value == 0) { piscarJogador(); return };
+    if ($botaoJogar.textContent == 'Jogar') {
+        jogar();
+    } else if ($botaoJogar.textContent == 'Pausar') {
+        pausar();
+    }
+})
 
 
 $mainBlocos.addEventListener('click', function (event) {
     if (vencedor) { return };
-    piscarJogador();
-    if ($jogador1.value == 0 || $jogador2.value == 0) { return };
+
+    if ($botaoJogar.textContent == 'Jogar') { piscarBotaoJogar(); return };
 
     if (event.target.classList.contains('main-blocos')) {
         return;
@@ -440,7 +477,7 @@ $mainBlocos.addEventListener('click', function (event) {
         adicionaHistoricoJogadas(jogada, 'nono');
     }
 
-    
+
     jogadorAtual()
     verificarVitoria();
     alternarJogada();

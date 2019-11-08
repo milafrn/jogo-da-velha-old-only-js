@@ -350,3 +350,17 @@ body {
 .digite-jogador::placeholder{
     color: red;
 }
+
+.pausar {
+    background-color: #ff7011;
+}
+
+.pausar:hover {
+    background-color: #fff;
+    color: #ff7011;
+}
+
+.piscar-botao-jogar {
+    background-color: red;
+    color: #fff;
+}
