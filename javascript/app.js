@@ -39,7 +39,7 @@ let botAtivado = false;
 
 let md = false;
 
-function alternarJogada() {
+const alternarJogada = () => {
     if (jogada == 'x') {
         jogada = 'o';
     } else {
@@ -47,11 +47,11 @@ function alternarJogada() {
     }
 }
 
-function atribuirVencedor() {
+const atribuirVencedor = () => {
     vencedor = jogada;
 }
 
-function atribuirPlacar() {
+const atribuirPlacar = () => {
     if (vencedor == 'x') {
         $placar1.innerHTML = parseInt($placar1.textContent) + 1;
     } else if (vencedor == 'o') {
@@ -59,7 +59,7 @@ function atribuirPlacar() {
     }
 }
 
-function atribuirNomeVencedor() {
+const atribuirNomeVencedor = () => {
     if (vencedor == 'x') {
         return $jogador1.value
     } else if (vencedor == 'o') {
@@ -71,7 +71,7 @@ function atribuirNomeVencedor() {
 }
 
 
-function verificarVitoria() {
+const verificarVitoria = () => {
 
     const posicoes = [
         $bloco1.textContent, $bloco2.textContent, $bloco3.textContent,
@@ -97,14 +97,14 @@ function verificarVitoria() {
     atribuirPlacar();
 }
 
-function sequenciaValida(posicoes) {
+const sequenciaValida = (posicoes) => {
     for (posicao of posicoes) {
         if (posicao != jogada) { return false; }
     }
     return true;
 }
 
-function reset() {
+const reset = () => {
 
     $bloco1.innerHTML = '';
     $bloco2.innerHTML = '';
@@ -122,19 +122,19 @@ function reset() {
     $historicoJogadas.innerHTML = '';
 }
 
-function resetVelhaVencedor() {
+const resetVelhaVencedor = () => {
     if (deuVelha() || vencedor) {
         reset();
     }
 }
 
-function resetPlacar() {
+const resetPlacar = () => {
     $placar1.textContent = 0;
     $placar2.textContent = 0;
     $nomeJogadorPlacar.textContent = '';
 }
 
-function deuVelha() {
+const deuVelha = () => {
 
     if (($bloco1.textContent == 'x' || $bloco1.textContent == 'o') &&
         ($bloco2.textContent == 'x' || $bloco2.textContent == 'o') &&
@@ -152,7 +152,7 @@ function deuVelha() {
 }
 
 
-function bot() {
+const bot = () => {
     if (vencedor) { return };
     if (deuVelha()) { return };
 
@@ -207,19 +207,19 @@ function bot() {
     }
 }
 
-function melhorDeTres() {
+const melhorDeTres = () => {
     if (md == false && ($placar1.textContent == 2 || $placar2.textContent == 2)) {
         resetPlacar();
     }
 }
 
-function melhorDeCinco() {
+const melhorDeCinco = () => {
     if (md == true && ($placar1.textContent == 3 || $placar2.textContent == 3)) {
         resetPlacar();
     }
 }
 
-function saberJogador(jogadaAtual) {
+const saberJogador = (jogadaAtual) => {
     const saberJogador1 = $jogador1.value;
     const saberJogador2 = $jogador2.value;
 
@@ -227,7 +227,7 @@ function saberJogador(jogadaAtual) {
     if (jogadaAtual == 'o') { return saberJogador2 };
 }
 
-function jogadorAtual() {
+const jogadorAtual = () => {
     if (botAtivado) { return }
     if (jogada == 'x') {
         $nomeJogadorPlacar.textContent = $jogador1.value;
@@ -239,7 +239,7 @@ function jogadorAtual() {
 
 // Funções de criação \/
 
-function adicionaHistoricoJogadas(jogadaAtual, posicao) {
+const adicionaHistoricoJogadas = (jogadaAtual, posicao) => {
     const guardaHistorico = $historicoJogadas.innerHTML;
 
     $historicoJogadas.innerHTML = guardaHistorico + `
@@ -253,7 +253,7 @@ function adicionaHistoricoJogadas(jogadaAtual, posicao) {
     `
 }
 
-function adicionarHistoricoPartidas() {
+const adicionarHistoricoPartidas = () => {
     if (!(deuVelha() || vencedor)) {
         return
     }
@@ -332,7 +332,7 @@ function adicionarHistoricoPartidas() {
 }
 // funções de criação /\
 
-function piscarJogador() {
+const piscarJogador = () => {
     if ($jogador1.value != 0 && $jogador2.value != 0) { return };
     $jogador1.classList.add('digite-jogador');
     $jogador2.classList.add('digite-jogador');
@@ -386,7 +386,7 @@ $jogador2.addEventListener('keypress', function () {
     }
 })
 
-function piscarBotaoJogar() {
+const piscarBotaoJogar = () => {
     if ($botaoJogar.textContent != 'Jogar') { return };
     $botaoJogar.classList.add('piscar-botao-jogar');
     $botaoJogar.classList.add('piscar-botao-jogar');
@@ -404,17 +404,22 @@ function piscarBotaoJogar() {
     }, 1500)
 }
 
-function jogar() {
+const jogar = () => {
     $botaoJogar.innerHTML = 'Pausar';
     $botaoJogar.classList.add('pausar');
 }
-function pausar() {
+
+
+const pausar = () => {
     $botaoJogar.innerHTML = 'Jogar';
     $botaoJogar.classList.remove('pausar');
 }
 
 $botaoJogar.addEventListener('click', function () {
-    if ($jogador1.value == 0 || $jogador2.value == 0) { piscarJogador(); return };
+    if ($jogador1.value == 0 || $jogador2.value == 0) {
+        piscarJogador();
+        return
+    };
     if ($botaoJogar.textContent == 'Jogar') {
         jogar();
     } else if ($botaoJogar.textContent == 'Pausar') {
