@@ -32,12 +32,25 @@ const $bloco9 = document.querySelector('.bloco-9');
 
 const $historicoJogadas = document.querySelector('.wrapper-historico-jogadas');
 
+const campos = document.querySelectorAll('.blocos');
+
+
 let jogada = 'x';
 let vencedor;
 
 let botAtivado = false;
 
 let md = false;
+
+let arrayHistoricoJogadas = [];
+
+const criaArrayHistoricoJogadas = () => {
+    const novoArrayHistoricoJogada = [];
+    for (campo of campos) {
+        novoArrayHistoricoJogada.push(campo.textContent);
+    }
+    arrayHistoricoJogadas.push(novoArrayHistoricoJogada);
+}
 
 const alternarJogada = () => {
     if (jogada == 'x') {
@@ -120,6 +133,7 @@ const reset = () => {
     vencedor = undefined;
 
     $historicoJogadas.innerHTML = '';
+    arrayHistoricoJogadas = [];
 }
 
 const resetVelhaVencedor = () => {
@@ -159,46 +173,55 @@ const bot = () => {
     const jogadaBot = Math.floor(Math.random() * 9);
     if (jogadaBot == 0 && $bloco1.textContent == '') {
         $bloco1.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'primeiro');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 1 && $bloco2.textContent == '') {
         $bloco2.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'segundo');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 2 && $bloco3.textContent == '') {
         $bloco3.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'terceiro');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 3 && $bloco4.textContent == '') {
         $bloco4.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'quarto');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 4 && $bloco5.textContent == '') {
         $bloco5.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'quinto');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 5 && $bloco6.textContent == '') {
         $bloco6.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'sexto');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 6 && $bloco7.textContent == '') {
         $bloco7.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'setimo');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 7 && $bloco8.textContent == '') {
         $bloco8.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'oitavo');
         verificarVitoria();
         alternarJogada();
     } else if (jogadaBot == 8 && $bloco9.textContent == '') {
         $bloco9.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'nono');
         verificarVitoria();
         alternarJogada();
@@ -251,6 +274,16 @@ const adicionaHistoricoJogadas = (jogadaAtual, posicao) => {
           </div>
         </div>
     `
+    const arrayCardHistorico = document.querySelectorAll('.box-historico-jogadas');
+
+    for (let i = 0; i < arrayHistoricoJogadas.length; i++) {
+        arrayCardHistorico[i].addEventListener('click', () => {
+            console.log(arrayHistoricoJogadas[i]);
+            for(let index = 0; index < campos.length; index++){
+                campos[index].textContent = arrayHistoricoJogadas[i][index];
+            }
+        })
+    }
 }
 
 const adicionarHistoricoPartidas = () => {
@@ -439,49 +472,57 @@ $mainBlocos.addEventListener('click', function (event) {
     if (event.target.classList.contains('bloco-1')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'primeiro');
     }
     if (event.target.classList.contains('bloco-2')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'segundo');
     }
     if (event.target.classList.contains('bloco-3')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'terceiro');
     }
     if (event.target.classList.contains('bloco-4')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'quarto');
     }
     if (event.target.classList.contains('bloco-5')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'quinto');
     }
     if (event.target.classList.contains('bloco-6')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'sexto');
     }
     if (event.target.classList.contains('bloco-7')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'setimo');
     }
     if (event.target.classList.contains('bloco-8')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'oitavo');
     }
     if (event.target.classList.contains('bloco-9')) {
         if (event.target.textContent != '') { return }
         event.target.textContent = jogada;
+        criaArrayHistoricoJogadas();
         adicionaHistoricoJogadas(jogada, 'nono');
     }
-
 
     jogadorAtual()
     verificarVitoria();
