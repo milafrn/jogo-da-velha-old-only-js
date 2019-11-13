@@ -50,14 +50,17 @@ const criaArrayHistoricoJogadas = () => {
         novoArrayHistoricoJogada.push(campo.textContent);
     }
     arrayHistoricoJogadas.push(novoArrayHistoricoJogada);
+    console.log(arrayHistoricoJogadas);
 }
 
 const alternarJogada = () => {
-    if (jogada == 'x') {
-        jogada = 'o';
-    } else {
-        jogada = 'x';
-    }
+
+    return (jogada == 'x') ? jogada = 'o' : jogada = 'x';
+    // if (jogada == 'x') {
+    //     jogada = 'o';
+    // } else {
+    //     jogada = 'x';
+    // }
 }
 
 const atribuirVencedor = () => {
@@ -266,25 +269,42 @@ const adicionaHistoricoJogadas = (jogadaAtual, posicao) => {
     const guardaHistorico = $historicoJogadas.innerHTML;
 
     $historicoJogadas.innerHTML = guardaHistorico + `
-        <div class="box-historico-jogadas">
-          <div class="mostra-jogada">${jogadaAtual}</div>
-          <div class="box-jogadas-jogador">
-            <h2 class="jogadas-historico-jogador">${saberJogador(jogadaAtual)}</h2>
-            <p class="declara-quadrado">${posicao} quadrado</p>
-          </div>
-        </div>
+    <div class="box-historico-jogadas">
+    <div class="mostra-jogada">${jogadaAtual}</div>
+    <div class="box-jogadas-jogador">
+    <h2 class="jogadas-historico-jogador">${saberJogador(jogadaAtual)}</h2>
+    <p class="declara-quadrado">${posicao} quadrado</p>
+    </div>
+    </div>
     `
     const arrayCardHistorico = document.querySelectorAll('.box-historico-jogadas');
 
-    for (let i = 0; i < arrayHistoricoJogadas.length; i++) {
-        arrayCardHistorico[i].addEventListener('click', () => {
-            console.log(arrayHistoricoJogadas[i]);
-            for(let index = 0; index < campos.length; index++){
-                campos[index].textContent = arrayHistoricoJogadas[i][index];
-            }
+    // for (let i = 0; i < arrayHistoricoJogadas.length; i++) {
+    //     const card = arrayCardHistorico[i]
+    //     card.addEventListener('click', () => {
+    //         for(let index = 0; index < campos.length; index++){
+    //             campos[index].textContent = arrayHistoricoJogadas[i][index];
+    //         }
+    //     })
+    // }
+    // ================/\ isso aqui em cima faz a mesma coisa que \/ isso logo abaixo.
+
+
+    let local = 0;
+    for (card of arrayCardHistorico) {
+        const array = arrayHistoricoJogadas[local]
+        card.addEventListener('click', () => {
+            let position = 0
+            for (campo of campos) {
+                campo.textContent = array[position];
+                position++
+            }   
         })
+        local++
     }
 }
+
+
 
 const adicionarHistoricoPartidas = () => {
     if (!(deuVelha() || vencedor)) {
@@ -369,22 +389,22 @@ const piscarJogador = () => {
     if ($jogador1.value != 0 && $jogador2.value != 0) { return };
     $jogador1.classList.add('digite-jogador');
     $jogador2.classList.add('digite-jogador');
-    setTimeout(function () {
+    setTimeout(() => {
         $jogador1.classList.remove('digite-jogador');
         $jogador2.classList.remove('digite-jogador');
     }, 500)
-    setTimeout(function () {
+    setTimeout(() => {
         $jogador1.classList.add('digite-jogador');
         $jogador2.classList.add('digite-jogador');
     }, 1000)
-    setTimeout(function () {
+    setTimeout(() => {
         $jogador1.classList.remove('digite-jogador');
         $jogador2.classList.remove('digite-jogador');
     }, 1500)
 }
 
 
-$switchBot.addEventListener('click', function () {
+$switchBot.addEventListener('click',() => {
     $stateSwitchBot.classList.toggle('switch-on');
     $switchBot.classList.toggle('switch-bot-on');
     resetPlacar();
@@ -399,7 +419,7 @@ $switchBot.addEventListener('click', function () {
     }
 })
 
-$switchMd.addEventListener('click', function () {
+$switchMd.addEventListener('click',() => {
     $stateSwitchMd.classList.toggle('switch-on');
     md = !md;
     resetPlacar();
@@ -407,13 +427,13 @@ $switchMd.addEventListener('click', function () {
 })
 
 
-$jogador1.addEventListener('keypress', function () {
+$jogador1.addEventListener('keypress',() => {
     if ($jogador1.value == 0) {
         $jogador1.classList.remove('digite-jogador');
     }
 })
 
-$jogador2.addEventListener('keypress', function () {
+$jogador2.addEventListener('keypress',() => {
     if ($jogador2.value == 0) {
         $jogador2.classList.remove('digite-jogador');
     }
@@ -423,15 +443,15 @@ const piscarBotaoJogar = () => {
     if ($botaoJogar.textContent != 'Jogar') { return };
     $botaoJogar.classList.add('piscar-botao-jogar');
     $botaoJogar.classList.add('piscar-botao-jogar');
-    setTimeout(function () {
+    setTimeout(() => {
         $botaoJogar.classList.remove('piscar-botao-jogar');
         $botaoJogar.classList.remove('piscar-botao-jogar');
     }, 500)
-    setTimeout(function () {
+    setTimeout(() => {
         $botaoJogar.classList.add('piscar-botao-jogar');
         $botaoJogar.classList.add('piscar-botao-jogar');
     }, 1000)
-    setTimeout(function () {
+    setTimeout(() => {
         $botaoJogar.classList.remove('piscar-botao-jogar');
         $botaoJogar.classList.remove('piscar-botao-jogar');
     }, 1500)
@@ -448,7 +468,7 @@ const pausar = () => {
     $botaoJogar.classList.remove('pausar');
 }
 
-$botaoJogar.addEventListener('click', function () {
+$botaoJogar.addEventListener('click',() => {
     if ($jogador1.value == 0 || $jogador2.value == 0) {
         piscarJogador();
         return
@@ -461,7 +481,7 @@ $botaoJogar.addEventListener('click', function () {
 })
 
 
-$mainBlocos.addEventListener('click', function (event) {
+$mainBlocos.addEventListener('click',(event) => {
     if (vencedor) { return };
 
     if ($botaoJogar.textContent == 'Jogar') { piscarBotaoJogar(); return };
@@ -537,7 +557,7 @@ $mainBlocos.addEventListener('click', function (event) {
     setTimeout(melhorDeTres, 2000);
 })
 
-$botaoReiniciar.addEventListener('click', function () {
+$botaoReiniciar.addEventListener('click',() => {
     reset();
     resetPlacar();
 })
