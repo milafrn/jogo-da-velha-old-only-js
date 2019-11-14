@@ -54,8 +54,10 @@ const criaArrayHistoricoJogadas = () => {
 }
 
 const alternarJogada = () => {
+    jogada = jogada == 'x' ? 'o' : 'x'
 
-    return (jogada == 'x') ? jogada = 'o' : jogada = 'x';
+    // jogada == 'x' ? jogada = 'o' : jogada = 'x';
+
     // if (jogada == 'x') {
     //     jogada = 'o';
     // } else {
@@ -68,11 +70,15 @@ const atribuirVencedor = () => {
 }
 
 const atribuirPlacar = () => {
-    if (vencedor == 'x') {
-        $placar1.innerHTML = parseInt($placar1.textContent) + 1;
-    } else if (vencedor == 'o') {
-        $placar2.innerHTML = parseInt($placar2.textContent) + 1;
-    }
+
+    vencedor == 'x' && ($placar1.innerHTML = parseInt($placar1.textContent) + 1);
+    vencedor == 'o' && ($placar2.innerHTML = parseInt($placar2.textContent) + 1);
+    // if (vencedor == 'x') {
+    //     $placar1.innerHTML = parseInt($placar1.textContent) + 1;
+    // } 
+    // if (vencedor == 'o') {
+    //     $placar2.innerHTML = parseInt($placar2.textContent) + 1;
+    // }
 }
 
 const atribuirNomeVencedor = () => {
@@ -89,10 +95,14 @@ const atribuirNomeVencedor = () => {
 
 const verificarVitoria = () => {
 
-    const posicoes = [
-        $bloco1.textContent, $bloco2.textContent, $bloco3.textContent,
-        $bloco4.textContent, $bloco5.textContent, $bloco6.textContent,
-        $bloco7.textContent, $bloco8.textContent, $bloco9.textContent]
+    // const posicoes = [
+    //     $bloco1.textContent, $bloco2.textContent, $bloco3.textContent,
+    //     $bloco4.textContent, $bloco5.textContent, $bloco6.textContent,
+    //     $bloco7.textContent, $bloco8.textContent, $bloco9.textContent]
+    const posicoes = [...document.querySelectorAll('.blocos')].map((item,index)=> {
+        console.log(item.textContent,index)
+        return item.textContent
+    })
     const linha789 = [posicoes[0], posicoes[1], posicoes[2]];
     const linha456 = [posicoes[3], posicoes[4], posicoes[5]];
     const linha123 = [posicoes[6], posicoes[7], posicoes[8]];
@@ -107,6 +117,7 @@ const verificarVitoria = () => {
     for (linha of linhas) {
         if (sequenciaValida(linha)) {
             atribuirVencedor();
+            console.log(sequenciaValida(linha))
         };
     }
 
@@ -140,6 +151,7 @@ const reset = () => {
 }
 
 const resetVelhaVencedor = () => {
+    // (deuVelha() || vencedor) && reset()
     if (deuVelha() || vencedor) {
         reset();
     }
@@ -298,7 +310,7 @@ const adicionaHistoricoJogadas = (jogadaAtual, posicao) => {
             for (campo of campos) {
                 campo.textContent = array[position];
                 position++
-            }   
+            }
         })
         local++
     }
@@ -404,7 +416,7 @@ const piscarJogador = () => {
 }
 
 
-$switchBot.addEventListener('click',() => {
+$switchBot.addEventListener('click', () => {
     $stateSwitchBot.classList.toggle('switch-on');
     $switchBot.classList.toggle('switch-bot-on');
     resetPlacar();
@@ -419,7 +431,7 @@ $switchBot.addEventListener('click',() => {
     }
 })
 
-$switchMd.addEventListener('click',() => {
+$switchMd.addEventListener('click', () => {
     $stateSwitchMd.classList.toggle('switch-on');
     md = !md;
     resetPlacar();
@@ -427,13 +439,13 @@ $switchMd.addEventListener('click',() => {
 })
 
 
-$jogador1.addEventListener('keypress',() => {
+$jogador1.addEventListener('keypress', () => {
     if ($jogador1.value == 0) {
         $jogador1.classList.remove('digite-jogador');
     }
 })
 
-$jogador2.addEventListener('keypress',() => {
+$jogador2.addEventListener('keypress', () => {
     if ($jogador2.value == 0) {
         $jogador2.classList.remove('digite-jogador');
     }
@@ -468,7 +480,7 @@ const pausar = () => {
     $botaoJogar.classList.remove('pausar');
 }
 
-$botaoJogar.addEventListener('click',() => {
+$botaoJogar.addEventListener('click', () => {
     if ($jogador1.value == 0 || $jogador2.value == 0) {
         piscarJogador();
         return
@@ -481,7 +493,7 @@ $botaoJogar.addEventListener('click',() => {
 })
 
 
-$mainBlocos.addEventListener('click',(event) => {
+$mainBlocos.addEventListener('click', (event) => {
     if (vencedor) { return };
 
     if ($botaoJogar.textContent == 'Jogar') { piscarBotaoJogar(); return };
@@ -557,7 +569,7 @@ $mainBlocos.addEventListener('click',(event) => {
     setTimeout(melhorDeTres, 2000);
 })
 
-$botaoReiniciar.addEventListener('click',() => {
+$botaoReiniciar.addEventListener('click', () => {
     reset();
     resetPlacar();
 })
