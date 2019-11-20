@@ -20,20 +20,21 @@ const $nomeJogadorPlacar = document.querySelector('.nome-jogador-placar');
 
 const $mainBlocos = document.querySelector('.main-blocos');
 
-const $bloco1 = document.querySelector('.bloco-1');
-const $bloco2 = document.querySelector('.bloco-2');
-const $bloco3 = document.querySelector('.bloco-3');
-const $bloco4 = document.querySelector('.bloco-4');
-const $bloco5 = document.querySelector('.bloco-5');
-const $bloco6 = document.querySelector('.bloco-6');
-const $bloco7 = document.querySelector('.bloco-7');
-const $bloco8 = document.querySelector('.bloco-8');
-const $bloco9 = document.querySelector('.bloco-9');
+const $blocos = document.querySelectorAll('.blocos');
 
 const $historicoJogadas = document.querySelector('.wrapper-historico-jogadas');
 
-const campos = document.querySelectorAll('.blocos');
-
+const dicionarioPosicoes = {
+    0: 'Primeiro',
+    1: 'Segundo',
+    2: 'Terceiro',
+    3: 'Quarto',
+    4: 'Quinto',
+    5: 'Sexto',
+    6: 'Sétimo',
+    7: 'Oitavo',
+    8: 'Nono'
+}
 
 let jogada = 'x';
 let vencedor;
@@ -44,25 +45,16 @@ let md = false;
 
 let arrayHistoricoJogadas = [];
 
+
 const criaArrayHistoricoJogadas = () => {
     const novoArrayHistoricoJogada = [];
-    for (campo of campos) {
-        novoArrayHistoricoJogada.push(campo.textContent);
-    }
+    [...$blocos].map(campo => novoArrayHistoricoJogada.push(campo.textContent));
     arrayHistoricoJogadas.push(novoArrayHistoricoJogada);
     console.log(arrayHistoricoJogadas);
 }
 
 const alternarJogada = () => {
     jogada = jogada == 'x' ? 'o' : 'x'
-
-    // jogada == 'x' ? jogada = 'o' : jogada = 'x';
-
-    // if (jogada == 'x') {
-    //     jogada = 'o';
-    // } else {
-    //     jogada = 'x';
-    // }
 }
 
 const atribuirVencedor = () => {
@@ -73,12 +65,6 @@ const atribuirPlacar = () => {
 
     vencedor == 'x' && ($placar1.innerHTML = parseInt($placar1.textContent) + 1);
     vencedor == 'o' && ($placar2.innerHTML = parseInt($placar2.textContent) + 1);
-    // if (vencedor == 'x') {
-    //     $placar1.innerHTML = parseInt($placar1.textContent) + 1;
-    // } 
-    // if (vencedor == 'o') {
-    //     $placar2.innerHTML = parseInt($placar2.textContent) + 1;
-    // }
 }
 
 const atribuirNomeVencedor = () => {
@@ -94,13 +80,7 @@ const atribuirNomeVencedor = () => {
 
 
 const verificarVitoria = () => {
-
-    // const posicoes = [
-    //     $bloco1.textContent, $bloco2.textContent, $bloco3.textContent,
-    //     $bloco4.textContent, $bloco5.textContent, $bloco6.textContent,
-    //     $bloco7.textContent, $bloco8.textContent, $bloco9.textContent]
-    const posicoes = [...document.querySelectorAll('.blocos')].map((item,index)=> {
-        console.log(item.textContent,index)
+    const posicoes = [...document.querySelectorAll('.blocos')].map((item, index) => {
         return item.textContent
     })
     const linha789 = [posicoes[0], posicoes[1], posicoes[2]];
@@ -132,17 +112,7 @@ const sequenciaValida = (posicoes) => {
 }
 
 const reset = () => {
-
-    $bloco1.innerHTML = '';
-    $bloco2.innerHTML = '';
-    $bloco3.innerHTML = '';
-    $bloco4.innerHTML = '';
-    $bloco5.innerHTML = '';
-    $bloco6.innerHTML = '';
-    $bloco7.innerHTML = '';
-    $bloco8.innerHTML = '';
-    $bloco9.innerHTML = '';
-
+    [...$blocos].map(bloco => bloco.innerHTML = '');
     jogada = 'x';
     vencedor = undefined;
 
@@ -164,85 +134,32 @@ const resetPlacar = () => {
 }
 
 const deuVelha = () => {
-
-    if (($bloco1.textContent == 'x' || $bloco1.textContent == 'o') &&
-        ($bloco2.textContent == 'x' || $bloco2.textContent == 'o') &&
-        ($bloco3.textContent == 'x' || $bloco3.textContent == 'o') &&
-        ($bloco4.textContent == 'x' || $bloco4.textContent == 'o') &&
-        ($bloco5.textContent == 'x' || $bloco5.textContent == 'o') &&
-        ($bloco6.textContent == 'x' || $bloco6.textContent == 'o') &&
-        ($bloco7.textContent == 'x' || $bloco7.textContent == 'o') &&
-        ($bloco8.textContent == 'x' || $bloco8.textContent == 'o') &&
-        ($bloco9.textContent == 'x' || $bloco9.textContent == 'o')) {
-        return true;
-    } else {
-        return false;
-    }
+    const camposVazios = [];
+    Array.from($blocos).map((bloco, index) => {
+        if (bloco.textContent == '') camposVazios.push(bloco);
+    })
+    if (camposVazios.length == 0) return true;
 }
 
 
 const bot = () => {
-    if (vencedor) { return };
-    if (deuVelha()) { return };
+    if (vencedor) return;
+    if (deuVelha()) return;
+    if (jogada === 'x') return;
 
     const jogadaBot = Math.floor(Math.random() * 9);
-    if (jogadaBot == 0 && $bloco1.textContent == '') {
-        $bloco1.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'primeiro');
-        verificarVitoria();
-        alternarJogada();
-    } else if (jogadaBot == 1 && $bloco2.textContent == '') {
-        $bloco2.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'segundo');
-        verificarVitoria();
-        alternarJogada();
-    } else if (jogadaBot == 2 && $bloco3.textContent == '') {
-        $bloco3.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'terceiro');
-        verificarVitoria();
-        alternarJogada();
-    } else if (jogadaBot == 3 && $bloco4.textContent == '') {
-        $bloco4.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'quarto');
-        verificarVitoria();
-        alternarJogada();
-    } else if (jogadaBot == 4 && $bloco5.textContent == '') {
-        $bloco5.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'quinto');
-        verificarVitoria();
-        alternarJogada();
-    } else if (jogadaBot == 5 && $bloco6.textContent == '') {
-        $bloco6.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'sexto');
-        verificarVitoria();
-        alternarJogada();
-    } else if (jogadaBot == 6 && $bloco7.textContent == '') {
-        $bloco7.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'setimo');
-        verificarVitoria();
-        alternarJogada();
-    } else if (jogadaBot == 7 && $bloco8.textContent == '') {
-        $bloco8.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'oitavo');
-        verificarVitoria();
-        alternarJogada();
-    } else if (jogadaBot == 8 && $bloco9.textContent == '') {
-        $bloco9.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'nono');
-        verificarVitoria();
-        alternarJogada();
-    } else {
-        bot();
-    }
+
+    Array.from($blocos).map((bloco, index) => {
+        if (jogadaBot == index && bloco.textContent == '') {
+            bloco.textContent = jogada;
+            criaArrayHistoricoJogadas();
+            adicionaHistoricoJogadas(jogada, dicionarioPosicoes[index]);
+            verificarVitoria();
+            alternarJogada();
+            return;
+        }
+    })
+    bot();
 }
 
 const melhorDeTres = () => {
@@ -289,7 +206,7 @@ const adicionaHistoricoJogadas = (jogadaAtual, posicao) => {
     </div>
     </div>
     `
-    const arrayCardHistorico = document.querySelectorAll('.box-historico-jogadas');
+    const arrayCardHistorico = [...document.querySelectorAll('.box-historico-jogadas')];
 
     // for (let i = 0; i < arrayHistoricoJogadas.length; i++) {
     //     const card = arrayCardHistorico[i]
@@ -302,18 +219,17 @@ const adicionaHistoricoJogadas = (jogadaAtual, posicao) => {
     // ================/\ isso aqui em cima faz a mesma coisa que \/ isso logo abaixo.
 
 
-    let local = 0;
-    for (card of arrayCardHistorico) {
+    arrayCardHistorico.map((card, local) => {
         const array = arrayHistoricoJogadas[local]
         card.addEventListener('click', () => {
-            let position = 0
-            for (campo of campos) {
-                campo.textContent = array[position];
-                position++
-            }
+            let position = 0;
+
+            [...$blocos].map((bloco) => {
+                bloco.textContent = array[position];
+                position++;
+            })
         })
-        local++
-    }
+    })
 }
 
 
@@ -343,41 +259,12 @@ const adicionarHistoricoPartidas = () => {
     const mainBloquinhos = document.createElement('div');
     mainBloquinhos.classList.add('main-bloquinhos');
 
-    const bloquinho1 = document.createElement('div');
-    bloquinho1.classList.add('bloquinho');
-    bloquinho1.textContent = $bloco1.textContent;
-
-    const bloquinho2 = document.createElement('div');
-    bloquinho2.classList.add('bloquinho');
-    bloquinho2.textContent = $bloco2.textContent;
-
-    const bloquinho3 = document.createElement('div');
-    bloquinho3.classList.add('bloquinho');
-    bloquinho3.textContent = $bloco3.textContent;
-
-    const bloquinho4 = document.createElement('div');
-    bloquinho4.classList.add('bloquinho');
-    bloquinho4.textContent = $bloco4.textContent;
-
-    const bloquinho5 = document.createElement('div');
-    bloquinho5.classList.add('bloquinho');
-    bloquinho5.textContent = $bloco5.textContent;
-
-    const bloquinho6 = document.createElement('div');
-    bloquinho6.classList.add('bloquinho');
-    bloquinho6.textContent = $bloco6.textContent;
-
-    const bloquinho7 = document.createElement('div');
-    bloquinho7.classList.add('bloquinho');
-    bloquinho7.textContent = $bloco7.textContent;
-
-    const bloquinho8 = document.createElement('div');
-    bloquinho8.classList.add('bloquinho');
-    bloquinho8.textContent = $bloco8.textContent;
-
-    const bloquinho9 = document.createElement('div');
-    bloquinho9.classList.add('bloquinho');
-    bloquinho9.textContent = $bloco9.textContent;
+    [...$blocos].map(bloco => {
+        const bloquinho = document.createElement('div');
+        bloquinho.classList.add('bloquinho');
+        bloquinho.textContent = bloco.textContent;
+        mainBloquinhos.appendChild(bloquinho);
+    })
 
     $boxMainHistorico.appendChild(boxHistorico);
     boxHistorico.appendChild(boxDeclaraVencedor);
@@ -385,15 +272,7 @@ const adicionarHistoricoPartidas = () => {
     boxDeclaraVencedor.appendChild(nomeJogador);
     boxHistorico.appendChild(cenario);
     boxHistorico.appendChild(mainBloquinhos);
-    mainBloquinhos.appendChild(bloquinho1);
-    mainBloquinhos.appendChild(bloquinho2);
-    mainBloquinhos.appendChild(bloquinho3);
-    mainBloquinhos.appendChild(bloquinho4);
-    mainBloquinhos.appendChild(bloquinho5);
-    mainBloquinhos.appendChild(bloquinho6);
-    mainBloquinhos.appendChild(bloquinho7);
-    mainBloquinhos.appendChild(bloquinho8);
-    mainBloquinhos.appendChild(bloquinho9);
+
 }
 // funções de criação /\
 
@@ -493,6 +372,8 @@ $botaoJogar.addEventListener('click', () => {
 })
 
 
+
+
 $mainBlocos.addEventListener('click', (event) => {
     if (vencedor) { return };
 
@@ -501,60 +382,14 @@ $mainBlocos.addEventListener('click', (event) => {
     if (event.target.classList.contains('main-blocos')) {
         return;
     }
-    if (event.target.classList.contains('bloco-1')) {
-        if (event.target.textContent != '') { return }
-        event.target.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'primeiro');
-    }
-    if (event.target.classList.contains('bloco-2')) {
-        if (event.target.textContent != '') { return }
-        event.target.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'segundo');
-    }
-    if (event.target.classList.contains('bloco-3')) {
-        if (event.target.textContent != '') { return }
-        event.target.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'terceiro');
-    }
-    if (event.target.classList.contains('bloco-4')) {
-        if (event.target.textContent != '') { return }
-        event.target.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'quarto');
-    }
-    if (event.target.classList.contains('bloco-5')) {
-        if (event.target.textContent != '') { return }
-        event.target.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'quinto');
-    }
-    if (event.target.classList.contains('bloco-6')) {
-        if (event.target.textContent != '') { return }
-        event.target.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'sexto');
-    }
-    if (event.target.classList.contains('bloco-7')) {
-        if (event.target.textContent != '') { return }
-        event.target.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'setimo');
-    }
-    if (event.target.classList.contains('bloco-8')) {
-        if (event.target.textContent != '') { return }
-        event.target.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'oitavo');
-    }
-    if (event.target.classList.contains('bloco-9')) {
-        if (event.target.textContent != '') { return }
-        event.target.textContent = jogada;
-        criaArrayHistoricoJogadas();
-        adicionaHistoricoJogadas(jogada, 'nono');
-    }
+    [...$blocos].map((bloco, index) => {
+        if (event.target.classList.contains(`bloco-${index + 1}`)) {
+            if (event.target.textContent != '') { return }
+            event.target.textContent = jogada;
+            criaArrayHistoricoJogadas();
+            adicionaHistoricoJogadas(jogada, dicionarioPosicoes[index])
+        }
+    })
 
     jogadorAtual()
     verificarVitoria();
@@ -573,4 +408,3 @@ $botaoReiniciar.addEventListener('click', () => {
     reset();
     resetPlacar();
 })
-
