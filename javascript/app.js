@@ -118,6 +118,24 @@ const reset = () => {
 
     $historicoJogadas.innerHTML = '';
     arrayHistoricoJogadas = [];
+    
+}
+
+const resetJogadores = () => {
+    $jogador1.value = '';
+    $jogador2.value = '';
+    $jogador2.disabled = false;
+}
+
+const resetBotaoJogar = () => {
+    $botaoJogar.classList.remove('pausar');
+    $botaoJogar.textContent = 'Jogar';
+}
+
+const resetBot = () => {
+    resetBotaoJogar();
+    if(botAtivado) return;
+    resetJogadores();
 }
 
 const resetVelhaVencedor = () => {
@@ -133,6 +151,21 @@ const resetPlacar = () => {
     $nomeJogadorPlacar.textContent = '';
 }
 
+const resetStateBot = () => {
+    if ($stateSwitchBot.classList.contains('switch-on') && $switchBot.classList.contains('switch-bot-on')) {
+        $stateSwitchBot.classList.remove('switch-on')
+        $switchBot.classList.remove('switch-bot-on')
+        botAtivado = !botAtivado;
+    }
+}
+
+const resetStateMd = () => {
+    if($stateSwitchMd.classList.contains('switch-on')){
+        $stateSwitchMd.classList.remove('switch-on')
+    } if(md){
+        md = false
+    }
+}
 const deuVelha = () => {
     const camposVazios = [];
     Array.from($blocos).map((bloco, index) => {
@@ -308,6 +341,7 @@ $switchBot.addEventListener('click', () => {
         $jogador2.value = '';
         $jogador2.disabled = false;
     }
+    resetBot();
 })
 
 $switchMd.addEventListener('click', () => {
@@ -407,4 +441,8 @@ $mainBlocos.addEventListener('click', (event) => {
 $botaoReiniciar.addEventListener('click', () => {
     reset();
     resetPlacar();
+    resetStateBot();
+    resetJogadores();
+    resetStateMd();
+    resetBotaoJogar();
 })
